@@ -46,20 +46,20 @@ public class seguidor {
 			while(cAncho){
 				//Leer Derecha
 				if(lector>=(promedio-15) or lector<=(promedio+15)){
-				rotate(1);
-				cAncho=True;
-				ancho++;
-				}else{
-				//Leer Izquierda
-				rotate(-ancho);
-				while(cAncho){
-					if(lector>=(promedio-15) or lector<=(promedio+15)){
-					rotate(-1);
+					rotate(1);
+					cAncho=True;
 					ancho++;
-					cAncho=True
-					}else{
-					cAncho=False; 			
-			
+				}else{
+					//Leer Izquierda
+					rotate(-ancho);
+					while(cAncho){
+						if(lector>=(promedio-15) or lector<=(promedio+15)){
+							rotate(-1);
+							ancho++;
+							cAncho=True
+						}else{
+							cAncho=False; 			
+					}}}}
 			//LimpiarPantalla
 			LCD.clear();
 			//Mostrar valor de negro en LCD x=0 y=0
@@ -72,77 +72,63 @@ public class seguidor {
 			setSpeed(700)
 			bool color=True;
 			while(color){
-			int lector=light.getNormalizedLightValue();
-			if(lector>=(promedio-15) or lector<=(promedio+15)){
-			forward();
-			stop();
-			color=True;
-			}else{
-			bool c2=true;
-			int grados=0;
-			while(c2=true){
-				//comprobar ancho en grados de la linea**
-				//Caso extremo, fin del camino.
-				if(grados=-180+ancho+5){
-					rotate(180-ancho);
-					grados=0;
-					while(grados<=180-ancho-5){
-						rotate(1);
-						lector=light.getNormalizedLightValue();
-						if(lector>=(promedio-15) or lector<=(promedio+15)){
-							rotate((ancho/2)-1);
-							color = false;
-							c2= false;
-						}else{
-							grados++;
-							c2=true}}
+				int lector=light.getNormalizedLightValue();
+				if(lector>=(promedio-15) or lector<=(promedio+15)){
+					forward();
+					stop();
+					color=True;
 				}else{
-				if(grados=-180+ancho+5){
-					rotate(180-ancho);
-					grados=0;
-					while(grados<=180-ancho-5){
-						rotate(1);
-						lector=light.getNormalizedLightValue();
-						if(lector>=(promedio-15) or lector<=(promedio+15)){
-							rotate((ancho/2)-1);
-							color = false;
-							c2= false;
-						}else{
-							grados++;
-							c2=true}}
-				}else{
-				if(grados=91){
-					rotate(-90);
-					grados=0;
-					while(grados>=-180+ancho+5){
-						rotate(-1);
-						lector=light.getNormalizedLightValue();
-						if(lector>=(promedio-15) or lector<=(promedio+15)){
-							rotate((-ancho/2)+1);
-							color = false;
-							c2= false;
-						}else{
-							grados--;
-							c2=true}}			
-				}else{
-					while(grados<=90){
-						rotate(1);
-						lector=light.getNormalizedLightValue();
-						if(lector>=(promedio-15) or lector<=(promedio+15)){
-							rotate((ancho/2)-1)
-							color = false;
-							c2 = false;
-						}else{
-							grados++;
-							c2=true
-			}}}}}
-			
-			
-			
-			
-
-						{
-				
+					bool c2=true;
+					int grados=0;
+					while(c2=true){
+						//comprobar ancho en grados de la linea**
+						//Caso extremo, fin del camino.
+						if(grados=180-ancho+1){
+							rotate(ancho);
+							lector=light.getNormalizedLightValue();
+							if(lector>=(promedio-15) or lector<=(promedio+15)){
+								color = false;
+								c2= false;
+							}}else{
+							if(grados=-180+ancho+5){
+								rotate(180-ancho);
+								grados=0;
+								while(grados<=180-ancho-5){
+									rotate(1);
+									lector=light.getNormalizedLightValue();
+									if(lector>=(promedio-15) or lector<=(promedio+15)){
+										rotate((ancho/2)-1);
+										color = false;
+										c2= false;
+									}else{
+										grados++;
+										c2=true}}
+							}else{
+								if(grados=91){
+									rotate(-90);
+									grados=0;
+									while(grados>=-180+ancho+5){
+										rotate(-1);
+										lector=light.getNormalizedLightValue();
+										if(lector>=(promedio-15) or lector<=(promedio+15)){
+											rotate((-ancho/2)+1);
+											color = false;
+											c2= false;
+										}else{
+											grados--;
+											c2=true}}			
+								}else{
+									while(grados<=90){
+										rotate(1);
+										lector=light.getNormalizedLightValue();
+										if(lector>=(promedio-15) or lector<=(promedio+15)){
+											rotate((ancho/2)-1)
+											color = false;
+											c2 = false;
+										}else{
+										grados++;
+										c2=true
+			}}}}}}}}
 		}
     }
 
