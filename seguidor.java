@@ -129,6 +129,9 @@ public class seguidor {
 										grados++;
 										c2=true
 			}}}}}}}}
+				if(touch2.isPressed()){
+					color=False;}
+				} 
 		}
     }
 
