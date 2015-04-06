@@ -42,23 +42,26 @@ public class seguidor {
 			//CrearAncho
 			int ancho=0;
 			int lAncho=light.getNormalizedLightValue();
-			bool cAncho=True;
+			boolean cAncho=true;
 			while(cAncho){
 				//Leer Derecha
-				if(lector>=(promedio-15) or lector<=(promedio+15)){
-					rotate(1);
-					cAncho=True;
+				if(lAncho>=(promedio-15) && lAncho<=(promedio+15)){
+					mb.rotate(1);
+					mc.rotate(1);
+					cAncho=true;
 					ancho++;
 				}else{
 					//Leer Izquierda
-					rotate(-ancho);
+					mb.rotate(-ancho);
+					mc.rotate(-ancho);
 					while(cAncho){
-						if(lector>=(promedio-15) or lector<=(promedio+15)){
-							rotate(-1);
+						if(lAncho>=(promedio-15) && lAncho<=(promedio+15)){
+							mb.rotate(-1);
+							mc.rotate(-1);
 							ancho++;
-							cAncho=True
+							cAncho=true;
 						}else{
-							cAncho=False; 			
+							cAncho=false; 			
 					}}}}
 			//LimpiarPantalla
 			LCD.clear();
@@ -69,73 +72,84 @@ public class seguidor {
 			//Mostrar valor de Ancho
 			
 			//empezamos con la acción
-			setSpeed(700)
-			bool color=True;
+			mb.setSpeed(700);
+			mc.setSpeed(700);
+			boolean color=true;
 			while(color){
 				int lector=light.getNormalizedLightValue();
-				if(lector>=(promedio-15) or lector<=(promedio+15)){
-					forward();
-					stop();
-					color=True;
+				if( lector >= (promedio-15) && lector <= (promedio+15) ){
+					mb.forward();
+					mc.forward();
+					mb.stop();
+					mc.stop();
+					color=true;
 				}else{
-					bool c2=true;
+					boolean c2=true;
 					int grados=0;
 					while(c2=true){
 						//comprobar ancho en grados de la linea**
 						//Caso extremo, fin del camino.
-						if(grados=180-ancho+1){
-							rotate(ancho);
+						if(grados==180-ancho+1){
+							mb.rotate(ancho);
+							mc.rotate(ancho);
 							lector=light.getNormalizedLightValue();
-							if(lector>=(promedio-15) or lector<=(promedio+15)){
+							if(lector>=(promedio-15) && lector<=(promedio+15)){
 								color = false;
 								c2= false;
 							}}else{
-							if(grados=-180+ancho+5){
-								rotate(180-ancho);
+							if(grados==-180+ancho+5){
+								mb.rotate(180-ancho);
+								mc.rotate(180-ancho);
 								grados=0;
 								while(grados<=180-ancho-5){
-									rotate(1);
+									mb.rotate(1);
+									mc.rotate(1);
 									lector=light.getNormalizedLightValue();
-									if(lector>=(promedio-15) or lector<=(promedio+15)){
-										rotate((ancho/2)-1);
+									if(lector>=(promedio-15) && lector<=(promedio+15)){
+										mb.rotate((ancho/2)-1);
+										mc.rotate((ancho/2)-1);
 										color = false;
 										c2= false;
 									}else{
 										grados++;
-										c2=true}}
+										c2=true;}}
 							}else{
-								if(grados=91){
-									rotate(-90);
+								if(grados==91){
+									mb.rotate(-90);
+									mc.rotate(-90);
 									grados=0;
 									while(grados>=-180+ancho+5){
-										rotate(-1);
+										mb.rotate(-1);
+										mc.rotate(-1);
 										lector=light.getNormalizedLightValue();
-										if(lector>=(promedio-15) or lector<=(promedio+15)){
-											rotate((-ancho/2)+1);
+										if(lector>=(promedio-15) && lector<=(promedio+15)){
+											mb.rotate((-ancho/2)+1);
+											mc.rotate((-ancho/2)+1);
 											color = false;
 											c2= false;
 										}else{
 											grados--;
-											c2=true}}			
+											c2=true;}}			
 								}else{
 									while(grados<=90){
-										rotate(1);
+										mb.rotate(1);
+										mc.rotate(1);
 										lector=light.getNormalizedLightValue();
-										if(lector>=(promedio-15) or lector<=(promedio+15)){
-											rotate((ancho/2)-1)
+										if(lector>=(promedio-15) && lector<=(promedio+15)){
+											mb.rotate((ancho/2)-1);
+											mc.rotate((ancho/2)-1);
 											color = false;
 											c2 = false;
 										}else{
 										grados++;
-										c2=true
+										c2=true;
 			}}}}}}}}
 				if(touch2.isPressed()){
-					color=False;}
+					color=false;}
 				} 
 		}
-    }
+    
 
     public static void main (String[] args) {
-        new seguidor().run();
-    }
+        new seguidor().run();}
 }
