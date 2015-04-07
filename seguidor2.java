@@ -1,4 +1,7 @@
 import lejos.nxt.*;
+import lejos.nxt.addon.*;
+import lejos.robotics.*;
+import lejos.util.Delay;
 
 public class seguidor2 {
     public void run(){
@@ -7,23 +10,23 @@ public class seguidor2 {
 		LightSensor light = new LightSensor(SensorPort.S3);		
 		NXTRegulatedMotor mb = Motor.B;
 		NXTRegulatedMotor mc = Motor.C;
-		if(touch2.isPressed()){	
+			
 			//LoopParaCrearColor
 			int contador=0;
-			int[][] negro = new int[1][10];
+			int[] negro = new int[10];
 			
 			while(contador <= 9){
 			//LimpiarPantalla
 			LCD.clear();
 			LCD.drawString("Light:",0,5);
 			LCD.drawInt(light.getNormalizedLightValue(),7,5);
-			negro[1][contador]=light.getNormalizedLightValue();
+			negro[contador]=light.getNormalizedLightValue();
 			contador++;
 			}
 			//valor negro final
-			int promedio = (negro[1][0] + negro[1][1] + negro[1][2] + negro[1][3] + negro[1][4] + negro[1][5] + negro[1][6] + negro[1][7] + negro[1][8] + negro[1][9])/10;
-			int pa = promedio + 15;
-			int pb = promedio - 15;
+			int promedio = (negro[0] + negro[1] + negro[2] + negro[3] + negro[4] + negro[5] + negro[6] + negro[7] + negro[8] + negro[9])/10;
+			int pa = promedio + 150;
+			int pb = promedio - 150;
 			//LimpiarPantalla
 			LCD.clear();
 			//Mostrar valor de negro en LCD x=0 y=0
@@ -31,47 +34,57 @@ public class seguidor2 {
 			LCD.drawInt(promedio,2,1);
 			//Mostrar valor de Ancho
 			int v0 = 300;
-			int va = 500;
+			int va = 450;
 			//empezamos con la acción
 			mb.setSpeed(v0);
 			mc.setSpeed(v0);
 			boolean color=true;
 			while(color){
 				int lector=light.getNormalizedLightValue();
-				if( lector >= pa  && lector <= pb ){
+				if( lector <= pa  && lector >= pb ){
 					mb.setSpeed(v0);
 					mc.setSpeed(v0);
 					mb.forward();
 					mc.forward();
-					Delay.msDelay(20)
 					color=true;
 				}else{
-					mb.setSpeed(va);
-					mc.setSpeed(v0);
+					mb.setSpeed(v0);
+					mc.setSpeed(va);
 					mb.forward();
 					mc.forward();
-					Delay.msDelay(10)
-					int lector=light.getNormalizedLightValue();
-					if( lector >= pa  && lector <= pb ){
+					Delay.msDelay(3);
+					mc.stop();
+					mb.stop();
+					lector=light.getNormalizedLightValue();
+					if( lector <= pa  && lector >= pb ){
+						mb.setSpeed(v0);
+						mc.setSpeed(v0);
+						mb.forward();
+						mc.forward();
 						color=true;
 					}else{
-						mc.setSpeed(va);
-						mb.setSpeed(v0);
+						mc.setSpeed(v0);
+						mb.setSpeed(va);
 						mc.forward();
 						mb.forward();
-						Delay.msDelay(10)
-						int lector=light.getNormalizedLightValue();
-						if( lector >= pa  && lector <= pb ){
+						Delay.msDelay(3);
+						mc.stop();
+						mb.stop();
+						lector=light.getNormalizedLightValue();
+						if( lector <= pa  && lector >= pb ){
+							mb.setSpeed(v0);
+							mc.setSpeed(v0);
+							mb.forward();
+							mc.forward();
 							color=true;
 						}else{
-							if(touch2.isPressed()){
-					//cuando choca y se devuelve}
-							} 
+							color=true;
+							
 						}
 					}
 				}
 			}
-		}
+		
     }
     
 
