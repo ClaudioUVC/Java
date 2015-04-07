@@ -1,6 +1,6 @@
 import lejos.nxt.*;
 
-public class seguidor {
+public class seguidor2 {
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
 		TouchSensor touch2 = new TouchSensor(SensorPort.S2);
@@ -76,5 +76,5 @@ public class seguidor {
     
 
     public static void main (String[] args) {
-        new seguidor().run();}
+        new seguidor2().run();}
 }
