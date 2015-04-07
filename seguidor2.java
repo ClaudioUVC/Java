@@ -66,11 +66,8 @@ public class seguidor {
 							if(touch2.isPressed()){
 					//cuando choca y se devuelve}
 							} 
-							
 						}
-					
 					}
-				
 				}
 			}
 		}
