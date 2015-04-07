@@ -43,6 +43,7 @@ public class seguidor {
 					mc.setSpeed(v0);
 					mb.forward();
 					mc.forward();
+					Delay.msDelay(20)
 					color=true;
 				}else{
 					mb.setSpeed(va);
