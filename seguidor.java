@@ -1,155 +1,88 @@
 import lejos.nxt.*;
+import lejos.nxt.addon.*;
+import lejos.robotics.*;
+import lejos.util.Delay;
 
-public class seguidor {
+public class seguidor2 {
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
-		TouchSensor touch2 = new TouchSensor(SensorPort.S1);
+		TouchSensor touch2 = new TouchSensor(SensorPort.S2);
 		LightSensor light = new LightSensor(SensorPort.S3);		
 		NXTRegulatedMotor mb = Motor.B;
 		NXTRegulatedMotor mc = Motor.C;
-		if(touch2.isPressed())
-		{	
+			
 			//LoopParaCrearColor
-			int contador=1;
-			int [][] negro = new int[1][10];
-			while(contador <= 10){
-
+			int contador=0;
+			int[] negro = new int[10];
+			
+			while(contador <= 9){
 			//LimpiarPantalla
 			LCD.clear();
-			//Mostrar en LCD @ X=0,Y=0
-			LCD.drawString("Motores B, C:",0,0);
-			//Mostrar valores del motor modulo 10000 @ X=0,Y=1
-			LCD.drawInt(mb.getTachoCount()%10000,6,1);
-			//Mostrar valores del motor 1000 @ X=12,Y=1
-			LCD.drawInt(mc.getTachoCount()%1000,12,1);
-
-			LCD.drawString("Touch:",0,4);
-			//if the sensor is pressed print X, else print O
-			if(touch.isPressed()) {
-				LCD.drawChar('X',7,4);
-			} else {
-				LCD.drawChar('O',7,4);
-			}
-
 			LCD.drawString("Light:",0,5);
 			LCD.drawInt(light.getNormalizedLightValue(),7,5);
-			negro[1][contador]=light.getNormalizedLightValue();
+			negro[contador]=light.getNormalizedLightValue();
 			contador++;
 			}
 			//valor negro final
-			int promedio= (negro[1][1] + negro[1][2] + negro[1][3] + negro[1][4] + negro[1][5] + negro[1][6] + negro[1][7] + negro[1][8] + negro[1][9] + negro[1][10])/10;
-			
-			//CrearAncho
-			int ancho=0;
-			int lAncho=light.getNormalizedLightValue();
-			boolean cAncho=true;
-			while(cAncho){
-				//Leer Derecha
-				if(lAncho>=(promedio-15) && lAncho<=(promedio+15)){
-					mb.rotate(1);
-					mc.rotate(1);
-					cAncho=true;
-					ancho++;
-				}else{
-					//Leer Izquierda
-					mb.rotate(-ancho);
-					mc.rotate(-ancho);
-					while(cAncho){
-						if(lAncho>=(promedio-15) && lAncho<=(promedio+15)){
-							mb.rotate(-1);
-							mc.rotate(-1);
-							ancho++;
-							cAncho=true;
-						}else{
-							cAncho=false; 			
-					}}}}
+			int promedio = (negro[0] + negro[1] + negro[2] + negro[3] + negro[4] + negro[5] + negro[6] + negro[7] + negro[8] + negro[9])/10;
+			int pa = promedio + 225;
+			int pb = promedio - 225;
 			//LimpiarPantalla
 			LCD.clear();
 			//Mostrar valor de negro en LCD x=0 y=0
-			LCD.drawString("Negro Ancho",0,0);
+			LCD.drawString("Negro",0,0);
 			LCD.drawInt(promedio,2,1);
-			LCD.drawInt(ancho,8,1);
 			//Mostrar valor de Ancho
-			
+			int v0 = 350;
+			int va = 300;
 			//empezamos con la acción
-			mb.setSpeed(700);
-			mc.setSpeed(700);
+			mb.setSpeed(v0);
+			mc.setSpeed(v0);
 			boolean color=true;
+			int g=1 ;
+			int r=25;
+			int l=0;
+			
 			while(color){
 				int lector=light.getNormalizedLightValue();
-				if( lector >= (promedio-15) && lector <= (promedio+15) ){
+				if( lector <= pa  && lector >= pb ){
+					r=30;
+					l=0;
+					va=300;
+					mb.setSpeed(v0);
+					mc.setSpeed(v0);
 					mb.forward();
 					mc.forward();
-					mb.stop();
-					mc.stop();
+					Delay.msDelay(250);
 					color=true;
-				}else{
-					boolean c2=true;
-					int grados=0;
-					while(c2=true){
-						//comprobar ancho en grados de la linea**
-						//Caso extremo, fin del camino.
-						if(grados==180-ancho+1){
-							mb.rotate(ancho);
-							mc.rotate(ancho);
-							lector=light.getNormalizedLightValue();
-							if(lector>=(promedio-15) && lector<=(promedio+15)){
-								color = false;
-								c2= false;
-							}}else{
-							if(grados==-180+ancho+5){
-								mb.rotate(180-ancho);
-								mc.rotate(180-ancho);
-								grados=0;
-								while(grados<=180-ancho-5){
-									mb.rotate(1);
-									mc.rotate(1);
-									lector=light.getNormalizedLightValue();
-									if(lector>=(promedio-15) && lector<=(promedio+15)){
-										mb.rotate((ancho/2)-1);
-										mc.rotate((ancho/2)-1);
-										color = false;
-										c2= false;
-									}else{
-										grados++;
-										c2=true;}}
-							}else{
-								if(grados==91){
-									mb.rotate(-90);
-									mc.rotate(-90);
-									grados=0;
-									while(grados>=-180+ancho+5){
-										mb.rotate(-1);
-										mc.rotate(-1);
-										lector=light.getNormalizedLightValue();
-										if(lector>=(promedio-15) && lector<=(promedio+15)){
-											mb.rotate((-ancho/2)+1);
-											mc.rotate((-ancho/2)+1);
-											color = false;
-											c2= false;
-										}else{
-											grados--;
-											c2=true;}}			
-								}else{
-									while(grados<=90){
-										mb.rotate(1);
-										mc.rotate(1);
-										lector=light.getNormalizedLightValue();
-										if(lector>=(promedio-15) && lector<=(promedio+15)){
-											mb.rotate((ancho/2)-1);
-											mc.rotate((ancho/2)-1);
-											color = false;
-											c2 = false;
-										}else{
-										grados++;
-										c2=true;
-			}}}}}}}}
-				if(touch2.isPressed()){
-					color=false;}
-				} 
-		}
+				}else if((lector>=pa || lector<=pb) && g==1){
+					mb.setSpeed(va);
+					mc.setSpeed(va);
+					mb.forward();
+					mc.backward();
+					Delay.msDelay(8);
+					lector=light.getNormalizedLightValue();
+					l++;
+					}else if((lector>=pa || lector<pb) && g==-1){
+						mc.setSpeed(va);
+						mb.setSpeed(va);
+						mc.forward();
+						mb.backward();
+						Delay.msDelay(8);
+						lector=light.getNormalizedLightValue();
+						l++;
+					
+				}
+				if(l>r){
+					r+=25;
+					g*=-1;
+					l=0;
+					va+=10;}
+			}
+		
+    }
     
 
     public static void main (String[] args) {
-        new seguidor().run();}
+        new seguidor2().run();}
 }
