@@ -45,7 +45,7 @@ public class seguidor {
 			int l=0;
 			int tcont=0;
 			boolean color=false;
-			while(!touch.isPressed() && tcont==0){
+			while(tcont==0){
 				color=false;
 				tcont=0;
 			if(touch.isPressed() && tcont==0){
@@ -58,7 +58,6 @@ public class seguidor {
 					l=0;
 					va=300;
 					vc=300;
-					g*=-1;
 					mb.setSpeed(v0);
 					mc.setSpeed(v0);
 					mb.forward();
@@ -72,6 +71,8 @@ public class seguidor {
 					mc.backward();
 					Delay.msDelay(8);
 					lector=light.getNormalizedLightValue();
+					if( lector <= pa && lector >= pb ){
+					g=-1;}
 					l++;
 					}else if((lector>=pa || lector<pb) && g==-1){
 						mc.setSpeed(vc);
@@ -80,6 +81,8 @@ public class seguidor {
 						mb.backward();
 						Delay.msDelay(8);
 						lector=light.getNormalizedLightValue();
+						if( lector <= pa && lector >= pb ){
+							g=-1;}
 						l++;
 					
 				}
