@@ -11,13 +11,6 @@ public class seguidor {
 		NXTRegulatedMotor mb = Motor.B;
 		NXTRegulatedMotor mc = Motor.C;
 		
-			//LoopParaCrearColor
-			int fila=0;
-			int columna=0;
-			int sentido=0;
-			int orientacion=0;
-			int[][] calles = new int[4][4];
-
 			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
 			////   La orientacion del robot sera el siguiente   ////
@@ -59,6 +52,19 @@ public class seguidor {
 			////               <<<< MODO TAXI >>>>              ////
 			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
+			
+			////   VALORES DE LA MATRIZ   ////
+			int[][] calles = new int[4][4]; //Es una ciudad con 16 esquinas y 24 calles.
+			int fila=0;
+			int columna=0;
+			int sentido=0;
+			int orientacion=2;
+			////   COLORES   ////
+			int negroL=; //Indicara donde esta el pasajero, y su destino. {sensor de luz}
+			int negroC=; //Color de la calle.                             {sensor de color}
+			int rojo=;   //Sentido -1.                                    {sensor de color}
+			int azul=;   //Sentido  1.                                    {sensor de color}
+			int verde=;  //Sentido  0.                                    {sensor de color}
 			
 			//>>>>>>>>>|_
 			//>>  LECTURA|_
