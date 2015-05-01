@@ -6,22 +6,37 @@ import lejos.util.Delay;
 public class seguidor {
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
-		TouchSensor touch2 = new TouchSensor(SensorPort.S2);
+		ColorSensor color = new ColorSensor(SensorPort.S2);
 		LightSensor light = new LightSensor(SensorPort.S3);		
 		NXTRegulatedMotor mb = Motor.B;
 		NXTRegulatedMotor mc = Motor.C;
-			
+		
 			//LoopParaCrearColor
-			int contador=0;
-			int[] negro = new int[10];
+			int fila=0;
+			int columna=0;
+			int sentido=0;
+			int[][] calles = new int[4][4];
+			//calles[fila][columna]={sentido (-1,1,0)} 
 			
-			while(contador <= 9){
-			//LimpiarPantalla
-			LCD.clear();
-			LCD.drawString("Light:",0,5);
-			LCD.drawInt(light.getNormalizedLightValue(),7,5);
-			negro[contador]=light.getNormalizedLightValue();
-			contador++;
+			while(fila <= 3)
+			{
+				sentido=0;
+				while(columna<=3)
+				{
+				//LimpiarPantalla
+				LCD.clear();
+				LCD.drawString("Light:",0,5);
+				LCD.drawInt(light.getNormalizedLightValue(),7,5);
+				if (color.getnormalizedColorValue()==rojo){
+					sentido=-1;
+				}else if(color.getnormalizedColorValue()==azul){
+					sentido=1;
+				}else if(color.getnormalizedColorValue==verde){
+					sentido=0
+				}
+				calles[fila][columna]=sentido;
+				contador++;
+				}
 			}
 			//valor negro final
 			int promedio = (negro[0] + negro[1] + negro[2] + negro[3] + negro[4] + negro[5] + negro[6] + negro[7] + negro[8] + negro[9])/10;
