@@ -17,14 +17,7 @@ public class seguidor {
 			int sentido=0;
 			int orientacion=0;
 			int[][] calles = new int[4][4];
-			
-			//calles[fila][columna]={SentidoCalle(-1,1,0),Orientacion(1,2,3,4)} 
-			//definir colores aca
-			//verde= //0
-			//rojo=  //-1
-			//azul=  //1
-			//------
-			
+
 			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
 			////   La orientacion del robot sera el siguiente   ////
@@ -33,12 +26,16 @@ public class seguidor {
 			//// Cardinalidad //// Orientacion  ////  Sentido   ////    
 			////////////////////////////////////////////////////////
 			////      N       ////      1      ////     -1      ////
-			////   O     E    ////   4     3   ////  -1     1   ////
+			////   O     E    ////   4     3   ////  -1  0  1   ////
 			////      S       ////      2      ////      1      ////
+			////////////////////////////////////////////////////////
+			//// Los sentidos seran con los siguientes colores  ////
+			////////////////////////////////////////////////////////
+			////    Verde=0   ///    Rojo=-1   ////   Azul=1    ////
 			////////////////////////////////////////////////////////
 			////     El robot comienza en la esquina [0][0]     ////
 			////   El robot comienza mirando hacia el sur (2)   ////
-			////  Esta calle comienza con sentido positivo (1)  ////
+			////    Esta calle comienza con sentido nulo (0)    ////
 			////////////////////////////////////////////////////////
 			////               MAPA DE LA CIUDAD                ////
 			////////////////////////////////////////////////////////
