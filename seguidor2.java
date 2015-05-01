@@ -15,6 +15,7 @@ public class seguidor {
 			int fila=0;
 			int columna=0;
 			int sentido=0;
+			int orientacion=0;
 			int[][] calles = new int[4][4];
 			
 			//calles[fila][columna]={SentidoCalle(-1,1,0),Orientacion(1,2,3,4)} 
@@ -25,28 +26,47 @@ public class seguidor {
 			//------
 			
 			////////////////////////////////////////////////////////
-			////La direccion donde mira el robot es el siguiente////
 			////////////////////////////////////////////////////////
-			////                 N           1                  ////
-			////              0     E  =  4     3               ////
-			////                 S           2                  ////
+			////   La orientacion del robot sera el siguiente   ////
+			////    El sentido de la calle sera el siguiente    ////
 			////////////////////////////////////////////////////////
+			//// Cardinalidad //// Orientacion  ////  Sentido   ////    
+			////////////////////////////////////////////////////////
+			////      N       ////      1      ////     -1      ////
+			////   O     E    ////   4     3   ////  -1     1   ////
+			////      S       ////      2      ////      1      ////
+			////////////////////////////////////////////////////////
+			////     El robot comienza en la esquina [0][0]     ////
 			////   El robot comienza mirando hacia el sur (2)   ////
+			////  Esta calle comienza con sentido positivo (1)  ////
+			////////////////////////////////////////////////////////
+			////               MAPA DE LA CIUDAD                ////
+			////////////////////////////////////////////////////////
+			//// [0][0]=======[1][0]=======[2][0]=======[3][0]  ////
+			////   ||           ||           ||           ||    ////
+			//// [0][1]=======[1][1]=======[2][1]=======[3][1]  ////
+			////   ||           ||           ||           ||    ////
+			//// [0][2]=======[1][2]=======[2][2]=======[3][2]  ////
+			////   ||           ||           ||           ||    ////
+			//// [0][3]=======[1][3]=======[2][3]=======[3][3]  ////
+			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
 			
-			while(fila <= 3)
+			while(columna <= 3)
 			{
+				//este while trabajara solo con orientaciones 1-2  
 				sentido=0;
-				while(columna<=3)
+				while(fila<=3)
 				{
-				if (color.getnormalizedColorValue()==rojo){
-					sentido=-1;
-				}else if(color.getnormalizedColorValue()==azul){
-					sentido=1;
-				}else if(color.getnormalizedColorValue==verde){
-					sentido=0
-				}
-				calles[fila][columna]=sentido;
+					//este while trabajara solo con orientaciones 3-4
+					if (color.getnormalizedColorValue()==rojo){
+						sentido=-1;
+					}else if(color.getnormalizedColorValue()==azul){
+						sentido=1;
+					}else if(color.getnormalizedColorValue==verde){
+						sentido=0
+					}
+				calles[fila][columna]={sentido,;
 				contador++;
 				}
 			}
