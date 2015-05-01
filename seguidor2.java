@@ -84,8 +84,9 @@ public class seguidor {
 			//>>>>>>>>>>>>>|
 			calles[0][0]=[[1,0],[2,-1],[3,0],[4,1]];
 			//avanza hasta encontrar una esquina
+			
 			//aca va el codigo del seguidor
-			//Mostrar valor de Ancho
+			//Velocidad del taxi
 			int v0 = 350;
 			int va = 300;
 			int vb = 700;
@@ -97,15 +98,15 @@ public class seguidor {
 			int r=25;
 			int l=0;
 			int tcont=0;
-			boolean color=false;
+			boolean analisis=false;
 			while(tcont==0){
 				color=false;
 				tcont=0;
 				if(touch.isPressed() && tcont==0){
-					color=true;
+					analisis=true;
 					tcont=1;
-					while(color){
-						int lector=light.getNormalizedLightValue();
+					while(analisis){
+						int lector=color.getNormalizedColorValue();
 						if( lector <= pa && lector >= pb ){
 							r=38;
 							l=0;
