@@ -16,17 +16,29 @@ public class seguidor {
 			int columna=0;
 			int sentido=0;
 			int[][] calles = new int[4][4];
-			//calles[fila][columna]={sentido (-1,1,0)} 
+			
+			//calles[fila][columna]={SentidoCalle(-1,1,0),Orientacion(1,2,3,4)} 
+			//definir colores aca
+			//verde= //0
+			//rojo=  //-1
+			//azul=  //1
+			//------
+			
+			////////////////////////////////////////////////////////
+			////La direccion donde mira el robot es el siguiente////
+			////////////////////////////////////////////////////////
+			////                 N           1                  ////
+			////              0     E  =  4     3               ////
+			////                 S           2                  ////
+			////////////////////////////////////////////////////////
+			////   El robot comienza mirando hacia el sur (2)   ////
+			////////////////////////////////////////////////////////
 			
 			while(fila <= 3)
 			{
 				sentido=0;
 				while(columna<=3)
 				{
-				//LimpiarPantalla
-				LCD.clear();
-				LCD.drawString("Light:",0,5);
-				LCD.drawInt(light.getNormalizedLightValue(),7,5);
 				if (color.getnormalizedColorValue()==rojo){
 					sentido=-1;
 				}else if(color.getnormalizedColorValue()==azul){
