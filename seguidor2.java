@@ -53,6 +53,19 @@ public class seguidor {
 			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
 			
+			////////////////////////////////////////////////////////
+			////  |COMBINACIONES POSIBLES|Orientacion|Sentido|  ////
+			////////////////////////////////////////////////////////
+			//// 1  |  1 = doblar                               ////
+			//// 1  | -1 = avanzar                              ////
+			//// 2  | -1 = avanzar                              ////
+			//// 2  | -1 = doblar                               ////
+			//// 3  | -1 = avanzar                              ////
+			//// 3  | -1 = doblar                               ////
+			//// 4  |  1 = doblar                               ////
+			//// 4  | -1 = avanzar                              ////
+			////////////////////////////////////////////////////////
+			
 			////   VALORES DE LA MATRIZ   ////
 			int[][] calles = new int[4][4]; //Es una ciudad con 16 esquinas y 24 calles.
 			int fila=0;
@@ -70,8 +83,10 @@ public class seguidor {
 			//>>  LECTURA|_
 			//>>>>>>>>>>>>>|
 			
+			
+			
 			while(columna <= 3)
-			{
+			{ 
 				//este while trabajara solo con orientaciones 1-2  
 				sentido=0;
 				while(fila<=3)
