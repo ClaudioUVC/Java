@@ -86,6 +86,8 @@ public class seguidor {
 			//avanza hasta encontrar una esquina
 			
 			//aca va el codigo del seguidor
+			int pa = negroC + //algo;
+			int pb = negroC - //algo;
 			//Velocidad del taxi
 			int v0 = 350;
 			int va = 300;
@@ -100,13 +102,13 @@ public class seguidor {
 			int tcont=0;
 			boolean analisis=false;
 			while(tcont==0){
-				color=false;
+				analisis=false;
 				tcont=0;
 				if(touch.isPressed() && tcont==0){
 					analisis=true;
 					tcont=1;
 					while(analisis){
-						int lector=color.getNormalizedColorValue();
+						int lector=color.getColorID();
 						if( lector <= pa && lector >= pb ){
 							r=38;
 							l=0;
@@ -118,14 +120,14 @@ public class seguidor {
 							mb.forward();
 							mc.forward();
 							Delay.msDelay(250);
-							color=true;
+							analisis=true;
 						}else if((lector>=pa || lector<=pb) && g==1){
 							mb.setSpeed(vc);
 							mc.setSpeed(va);
 							mb.forward();
 							mc.backward();
 							Delay.msDelay(8);
-							lector=light.getNormalizedLightValue();
+							lector=color.getColorID();
 							l++;
 							}else if((lector>=pa || lector<pb) && g==-1){
 								mc.setSpeed(vc);
@@ -133,7 +135,7 @@ public class seguidor {
 								mc.forward();
 								mb.backward();
 								Delay.msDelay(8);
-								lector=light.getNormalizedLightValue();
+								lector=color.getColorID();
 								l++;
 							}
 							if(l>r){
@@ -154,7 +156,7 @@ public class seguidor {
 									mb.backward();
 									Delay.msDelay(8);
 									t++;
-									lector=light.getNormalizedLightValue();
+									lector=color.getColorID();
 									if( lector <= pa && lector >= pb && t>=15 ){
 										t=51;
 										vc=400;
