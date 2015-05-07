@@ -2,8 +2,9 @@ import lejos.nxt.*;
 import lejos.nxt.addon.*;
 import lejos.robotics.*;
 import lejos.util.Delay;
+import classCelda;
 
-public class seguidor {
+public class TaxiV1{
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
 		ColorSensor color = new ColorSensor(SensorPort.S2);
@@ -60,9 +61,7 @@ public class seguidor {
 			//amarillo=5=xxo//
 			//morado=6=oxo//
 			////   VALORES DE LA MATRIZ   ////
-			int[][] calles = new int[4][4]; //Es una ciudad con 16 esquinas y 24 calles.
-			matrizCalle1=0;
-			matrizCalle2=0;
+			Celda[][]Calles =new Celda[4][4];
 			while (matrizCalle1<4){
 				while(matrizCalle2<4){
 					calles[matrizCalle1][matrizCalle2]=[0,0,0,0]	
@@ -172,5 +171,5 @@ public class seguidor {
 			}
 }
     public static void main (String[] args) {
-        new seguidor().run();}
+        new TaxiV1().run();}
 }
