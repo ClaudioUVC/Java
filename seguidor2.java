@@ -18,9 +18,9 @@ public class seguidor {
 			////////////////////////////////////////////////////////
 			//// Cardinalidad //// Orientacion  ////  Sentido   ////    
 			////////////////////////////////////////////////////////
-			////      N       ////      1      ////     -1      ////
-			////   O     E    ////   4     3   ////  -1  0  1   ////
-			////      S       ////      2      ////      1      ////
+			////      N       ////      0      ////             ////
+			////   O     E    ////   3     1   ////   0         ////
+			////      S       ////      2      ////             ////
 			////////////////////////////////////////////////////////
 			////   Los sentidos seran los siguientes colores    ////
 			////////////////////////////////////////////////////////
@@ -52,22 +52,22 @@ public class seguidor {
 			////               <<<< MODO TAXI >>>>              ////
 			////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////
-			
-			////////////////////////////////////////////////////////
-			////  |COMBINACIONES POSIBLES|Orientacion|Sentido|  ////
-			////////////////////////////////////////////////////////
-			//// 1  |  1 = doblar                               ////
-			//// 1  | -1 = avanzar                              ////
-			//// 2  |  1 = avanzar                              ////
-			//// 2  | -1 = doblar                               ////
-			//// 3  |  1 = avanzar                              ////
-			//// 3  | -1 = doblar                               ////
-			//// 4  |  1 = doblar                               ////
-			//// 4  | -1 = avanzar                              ////
-			////////////////////////////////////////////////////////
-			
+			//verde=0=ooo//
+			//rojo=1=oox//
+			//naranjo=2=xox//
+			//azul=3=xoo//
+			//cafe=4=oxx//
+			//amarillo=5=xxo//
+			//morado=6=oxo//
 			////   VALORES DE LA MATRIZ   ////
 			int[][] calles = new int[4][4]; //Es una ciudad con 16 esquinas y 24 calles.
+			matrizCalle1=0;
+			matrizCalle2=0;
+			while (matrizCalle1<4){
+				while(matrizCalle2<4){
+					calles[matrizCalle1][matrizCalle2]=[0,0,0,0]	
+				}
+			}
 			int fila=1;
 			int columna=1;
 			int sentido=0;
