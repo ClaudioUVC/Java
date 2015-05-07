@@ -1,8 +1,8 @@
 class Celda{
-  boolean a;
-  boolean b;
-  boolean c;
-  boolean d;
+  boolean norte;
+  boolean sur;
+  boolean este;
+  boolean oeste;
   public Celda(){
     a=false;
     b=false;
@@ -12,6 +12,6 @@ class Celda{
   
   public static void main(String[]args){
     Celda[][]Calles =new Celda[4][4];
-    //llamarvalor: matriz[2][3].c
+    //llamarvalor: matriz[2][3].sur
   }
 }
