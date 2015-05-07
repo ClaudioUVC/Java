@@ -80,20 +80,13 @@ public class TaxiV1{
 			
 			//SENSOR DE COLOR//
 			int negroC=; //Color de la calle.        
-			int verde=0//ooo//
-			int rojo=1//oox//
-			int naranjo=2//xox//
-			int azul=3//xoo//
-			int cafe=4//oxx//
-			int amarillo=5//xxo//
-			int morado=6//oxo//
-			
-			
-			//>>>>>>>>>|_
-			//>>  LECTURA|_
-			//>>>>>>>>>>>>>|
-			calles[0][0]=[[1,0],[2,-1],[3,0],[4,1]];
-			//avanza hasta encontrar una esquina
+			int verde=//ooo//
+			int rojo=//oox//
+			int naranjo=//xox//
+			int azul=//xoo//
+			int cafe=//oxx//
+			int amarillo=//xxo//
+			int morado=//oxo//
 			
 			//aca va el codigo del seguidor
 			int pa = negroC + //algo;
