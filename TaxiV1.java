@@ -70,11 +70,6 @@ public class TaxiV1{
 					calles[matrizCalle1][matrizCalle2].oeste=TF;
 				}
 			}
-			int fila=1;
-			int columna=1;
-			int sentido=0;
-			int orientacion=2;
-			
 			//SENSOR DE LUZ//
 			int negroL=; //Indicara donde esta el pasajero, y su destino. 
 			
@@ -104,6 +99,9 @@ public class TaxiV1{
 			int l=0;
 			int tcont=0;
 			boolean analisis=false;
+			int posicionx=0;
+			int posiciony=0;
+			int direccion=3;
 			while(tcont==0){
 				analisis=false;
 				tcont=0;
@@ -123,6 +121,8 @@ public class TaxiV1{
 							mb.forward();
 							mc.forward();
 							Delay.msDelay(250);
+							lector=color.getColorID();
+							if(lector==)
 							analisis=true;
 						}else if((lector>=pa || lector<=pb) && g==1){
 							mb.setSpeed(vc);
@@ -132,7 +132,7 @@ public class TaxiV1{
 							Delay.msDelay(8);
 							lector=color.getColorID();
 							l++;
-							}else if((lector>=pa || lector<pb) && g==-1){
+							}else if((lector>=pa || lector<=pb) && g==-1){
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
 								mc.forward();
