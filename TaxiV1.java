@@ -61,22 +61,33 @@ public class TaxiV1{
 			//amarillo=5=xxo//
 			//morado=6=oxo//
 			////   VALORES DE LA MATRIZ   ////
-			Celda[][]Calles =new Celda[4][4];
+			Celda[][]calles =new Celda[4][4];
 			while (matrizCalle1<4){
 				while(matrizCalle2<4){
-					calles[matrizCalle1][matrizCalle2]=[0,0,0,0]	
+					calles[matrizCalle1][matrizCalle2].norte=TF;
+					calles[matrizCalle1][matrizCalle2].sur=TF;
+					calles[matrizCalle1][matrizCalle2].este=TF;
+					calles[matrizCalle1][matrizCalle2].oeste=TF;
 				}
 			}
 			int fila=1;
 			int columna=1;
 			int sentido=0;
 			int orientacion=2;
-			////   COLORES   ////
-			int negroL=; //Indicara donde esta el pasajero, y su destino. {sensor de luz}
-			int negroC=; //Color de la calle.                             {sensor de color}
-			int rojo=;   //Sentido -1.                                    {sensor de color}
-			int azul=;   //Sentido  1.                                    {sensor de color}
-			int verde=;  //Sentido  0.                                    {sensor de color}
+			
+			//SENSOR DE LUZ//
+			int negroL=; //Indicara donde esta el pasajero, y su destino. 
+			
+			//SENSOR DE COLOR//
+			int negroC=; //Color de la calle.        
+			int verde=0//ooo//
+			int rojo=1//oox//
+			int naranjo=2//xox//
+			int azul=3//xoo//
+			int cafe=4//oxx//
+			int amarillo=5//xxo//
+			int morado=6//oxo//
+			
 			
 			//>>>>>>>>>|_
 			//>>  LECTURA|_
