@@ -4,10 +4,10 @@ class Celda{
   boolean este;
   boolean oeste;
   public Celda(){
-    a=false;
-    b=false;
-    c=false;
-    d=false;
+    a=null;
+    b=null;
+    c=null;
+    d=null;
   }
   
   public static void main(String[]args){
