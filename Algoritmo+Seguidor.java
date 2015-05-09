@@ -496,7 +496,9 @@ if{
 									taxitrabajando=true;
 								}
 							}
-            }}}
+						}
+					}
+				}
 			}
 		}
 	}
