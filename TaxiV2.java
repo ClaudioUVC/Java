@@ -60,31 +60,55 @@ public class TaxiV2{
 			//cafe=4=oxx//
 			//amarillo=5=xxo//
 			//morado=6=oxo//
-			////   VALORES DE LA MATRIZ   ////
+			////   VALORES DE LA MATRIZ CALLES   ////
+			matrizCalle1=1;
+			matrizCalle2=1;
 			Celda[][]calles =new Celda[4][4];
 			while (matrizCalle1<4){
 				while(matrizCalle2<4){
-					calles[matrizCalle1][matrizCalle2].norte=TF;
-					calles[matrizCalle1][matrizCalle2].sur=TF;
-					calles[matrizCalle1][matrizCalle2].este=TF;
-					calles[matrizCalle1][matrizCalle2].oeste=TF;
+					calles[matrizCalle1][matrizCalle2].norte=null;
+					calles[matrizCalle1][matrizCalle2].sur=null;
+					calles[matrizCalle1][matrizCalle2].este=null;
+					calles[matrizCalle1][matrizCalle2].oeste=null;
+					matrizCalle2=+1;
 				}
+				matrizCalle1=+1;
 			}
+			////   VALORES DE LA MATRIZ COLORES   ////
+			Celda[][]colores =new Celda[1][12];
+			//verde//ooo
+			calles[0][1].sur=true;
+			calles[0][1].este=true;
+			calles[0][1].oeste=true;
+			//rojo//oox
+			calles[0][0].sur=true;
+			calles[0][0].este=false;
+			calles[0][0].oeste=true;
+			//azul//xoo
+			calles[0][2].sur=true;
+			calles[0][2].este=true;
+			calles[0][2].oeste=false;
+			//amarillo//xxo
+			calles[0][3].sur=false;
+			calles[0][3].este=true;
+			calles[0][3].oeste=false;
+			//naranjo//xox
+			calles[0][5].sur=true;
+			calles[0][5].este=false;
+			calles[0][5].oeste=false;
+			//morado(magenta)//oxo
+			calles[0][4].sur=false;
+			calles[0][4].este=true;
+			calles[0][4].oeste=true;
+			//celeste(cyan)//oxx
+			calles[0][7].sur=false;
+			calles[0][7].este=false;
+			calles[0][7].oeste=true;
 			//SENSOR DE LUZ//
 			int negroL=; //Indicara donde esta el pasajero, y su destino. 
-			
-			//SENSOR DE COLOR//
-			int negroC=; //Color de la calle.        
-			int verde=//ooo//
-			int rojo=//oox//
-			int naranjo=//xox//
-			int azul=//xoo//
-			int cafe=//oxx//
-			int amarillo=//xxo//
-			int morado=//oxo//
 			//aca va el codigo del seguidor
-			int pa = negroC + //algo;
-			int pb = negroC - //algo;
+			int pa = 7; //algo;
+			int pb = 7; //algo;
 			//Velocidad del taxi
 			int v0 = 350;
 			int va = 300;
