@@ -126,9 +126,19 @@ public class TaxiV2{
 			posicionx=0;
 			posiciony=0;
 			mirando=3;
+			boolean lleguey=false;
+			boolean lleguex=false;
 			while(taxitrabajando==true){
+				if(posicionx=!direccionx){
+					lleguex=false;
+				}
+				if(posiciony=!direcciony){
+					lleguey=false;
+				}
+				while(lleguex==false || lleguey==false){
 				if(mirando==3 || mirando==1){
 					if(direcciony>posiciony){
+						lleguey=false;
 						if(mirando==3){
 							if(calles[posicionx][posiciony].sur==true){
 								analisis==true;
@@ -247,6 +257,7 @@ public class TaxiV2{
 							}
             }
 					}else if(direcciony<posiciony){
+						lleguey=false;
 						if(mirando==1){
 							if(calles[posicionx][posiciony].norte==true){
 								analisis==true;
@@ -324,6 +335,17 @@ public class TaxiV2{
 										color=false;
 									}
 								}
+							}else if(calles[posicionx][posiciony].oeste==true && calles[posicionx][posiciony].este==true){
+								if(direccionx>=posicionx){
+									doblar derecha
+									mirando=2;
+									taxitrabajando=true;
+								}else if(direccionx<posicionx){
+									doblar izquierda
+									mirando=4;
+									taxitrabajando=true;
+								}
+							
 							}else if(calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
 								doblar derecha
 								mirando=2;
@@ -332,19 +354,19 @@ public class TaxiV2{
 								doblar izquierda
 								mirando=4;
 								taxitrabajando=true;
-							}else if(calles[posicionx][posiciony].oeste==true && calles[posicionx][posiciony].este==true){
+							}
+						}else if(mirando==3){
+							if(calles[posicionx][posiciony].oeste==true && calles[posicionx][posiciony].este==true){
 								if(direccionx>=posicionx){
-									doblar derecha
+									doblar izquierda
 									mirando=2;
 									taxitrabajando=true;
 								}else if(direccionx<posicionx){
-									doblar izquierda
+									doblar derecha
 									mirando=4;
 									taxitrabajando=true;
 								}
-							}
-						}else if(mirando==3){
-							if(calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
+							}else if(calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
 								doblar izquierda
 								mirando=2;
 								taxitrabajando=true;
@@ -352,21 +374,33 @@ public class TaxiV2{
 								doblar derecha
 								mirando=4;
 								taxitrabajando=true;
-							}else if(calles[posicionx][posiciony].oeste==true && calles[posicionx][posiciony].este==true){
-								if(direccionx>=posicionx){
-									doblar izquierda
-									mirando=2;
-									taxitrabajando=true;
-								}else if(direccionx<posicionx){
-									doblar derecha
-									mirando=4;
-									taxitrabajando=true;
-								}
 							}
+						}
+					}else if(direcciony==posiciony){
+						lleguey=true;
+						if(direccionx>posicionx){
+							if(mirando==3){
+								doblar izquierda
+								mirando=2;
+							}else if(mirando==1){
+								doblar derecha
+								mirando=2;
+							}
+						}else if(direccion<posicionx){
+							if(mirando==3){
+								doblar derecha;
+								mirando=4;
+							}else if(mirando==1){
+								doblar izquierda
+								mirando=4;
+							}
+						}else if(direccion==posicionx){
+							lleguex=true;
 						}
 					}
 				}else if(mirando==4 || mirando==2){
 					if(direccionx>posicionx){
+						lleguex=false;
 						if(mirando==2){
 							if(calles[posicionx][posiciony].este==true){
 								analisis==true;
@@ -485,6 +519,7 @@ public class TaxiV2{
 							}
             }
 					}else if(direccionx<posicionx){
+						lleguex=false;
 						if(mirando==4){
 							if(calles[posicionx][posiciony].oeste==true){
 								analisis==true;
@@ -602,8 +637,32 @@ public class TaxiV2{
 								}
 							}
 						}
+					
+					}else if(direccionx==posicionx){
+						lleguex=true;
+						if(direcciony>posiciony){
+							if(mirando==4){
+								doblar derecha
+								mirando=1;
+							}else if(mirando==2){
+								doblar izquierda
+								mirando=1;
+							}
+						}else if(direcciony<posiciony){
+							if(mirando==4){
+								doblar izquierda
+								mirando=3;
+							}else if(mirando==2){
+								doblar derecha
+								mirando=3;
+							}
+						}else if(direcciony==posiciony){
+							lleguey=true;
+						}
 					}
 				}
+				}
+				//aqui poner script de preguntar direccion denuevo
 			}
 		}
 	}
