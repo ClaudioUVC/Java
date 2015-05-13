@@ -4,7 +4,7 @@ import lejos.robotics.*;
 import lejos.util.Delay;
 import taxi.*;
 
-public class TaxiV2{
+public class TaxiV21{
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
 		ColorHTSensor color = new ColorHTSensor(SensorPort.S4);
@@ -1188,5 +1188,5 @@ public class TaxiV2{
 
 
     public static void main (String[] args) {
-        new TaxiV2().run();}
+        new TaxiV21().run();}
 }
