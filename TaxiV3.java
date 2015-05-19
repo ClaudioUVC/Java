@@ -14,33 +14,76 @@ boolean lleguey=false;
 boolean lleguex=false;
 boolean trabajando=false;
 char pos="sur";
+char pos1="sur";
+char pos2="sur";
+char pos3="sur";
 if(trabajando==false){
-  preguntar direccion.
+  //preguntar direccion.
   while(direccionx!=posicionx || direcciony!=posiciony){
     trabajando=true;
     while(trabajando){
       if(mirando==1){
         pos="norte";
-        pos+1="este";
-        pos+2="sur";
-        pos+3="oeste";
+        pos1="este";
+        pos2="sur";
+        pos3="oeste";
       }else if(mirando==2){
         pos="este";
-        pos+1="sur";
-        pos+2="oeste";
-        pos+3="norte";
+        pos1="sur";
+        pos2="oeste";
+        pos3="norte";
       }else if(mirando==3){
         pos="sur";
-        pos+1="oeste";
-        pos+2="norte";
-        pos+3="este";
+        pos1="oeste";
+        pos2="norte";
+        pos3="este";
       }else if(mirando==4){
         pos="oeste";
-        pos+1="norte";
-        pos+2="este";
-        pos+3="sur";
+        pos1="norte";
+        pos2="este";
+        pos3="sur";
       }
-      
+      if(calles[posicionx][posiciony].pos==true){
+        -
+      }else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==true){
+        
+      }else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==false){
+        mc.setSpeed(vc);
+        mb.setSpeed(va);
+        mc.forward();
+        mb.forward();
+        Delay.msDelay(1000);
+        lector=color.getColorID();
+        while(lector!=black){
+          //izquierda
+          mc.setSpeed(vc);
+          mb.setSpeed(va);
+          mb.forward();
+          mc.backward();
+          Delay.msDelay(8);
+          lector=color.getColorID();
+        }
+        mirando=mirando+1;
+        trabajando=true;
+      }else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==false && calles[posicionx][posiciony].pos3==true){
+                mc.setSpeed(vc);
+        mb.setSpeed(va);
+        mc.forward();
+        mb.forward();
+        Delay.msDelay(1000);
+        lector=color.getColorID();
+        while(lector!=black){
+          //izquierda
+          mb.setSpeed(vc);
+          mc.setSpeed(va);
+          mc.forward();
+          mb.backward();
+          Delay.msDelay(8);
+          lector=color.getColorID();
+        }
+        mirando=mirando-1;
+        trabajando=true;
+      }
     }
   }
 }
