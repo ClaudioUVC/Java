@@ -64,10 +64,18 @@ if(trabajando==false){
               mc.stop();
               Delay.msDelay(1000);
               lector=color.getColorID();
-              posiciony++;
-              calles[posicionx][posiciony].sur=colores[0][lector].sur;
-              calles[posicionx][posiciony].este=colores[0][lector].este;
-              calles[posicionx][posiciony].oeste=colores[0][lector].oeste;
+              if(mirando==1){
+                posiciony--;
+              }else if(mirando==2){
+                posicionx++;
+              }else if(mirando==3){
+                posiciony++;
+              }else if(mirando==4){
+                posicionx--;
+              }
+              calles[posicionx][posiciony].pos=colores[0][lector].sur;
+              calles[posicionx][posiciony].pos1=colores[0][lector].oeste;
+              calles[posicionx][posiciony].pos3=colores[0][lector].este;
               taxitrabajando=true;
             }else{
               analisis=true;
