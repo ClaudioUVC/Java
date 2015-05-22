@@ -2,7 +2,6 @@ import lejos.nxt.*;
 import lejos.nxt.addon.*;
 import lejos.robotics.*;
 import lejos.util.Delay;
-import taxi.*;
 
 public class TaxiV21{
     public void run(){
