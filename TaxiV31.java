@@ -176,6 +176,31 @@ public class TaxiV21{
 								}
 							}
 						}else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==true){
+							if(mirando==1){
+								if(posicionx>=direccionx){
+
+								}else if(posicionx<direccionx){
+									
+								}
+							}else if(mirando==2){
+								if(posiciony>=direcciony){
+
+								}else if(posiciony<direcciony){
+
+								}
+							}else if(mirando==3){
+								if(posicionx>=direccionx){
+									
+								}else if(posicionx<direccionx){
+
+								}
+							}else if(mirando==4){
+								if(posiciony>=direcciony){
+
+								}else if(posiciony<direcciony){
+
+								}
+							}
 						}else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==false){
 							mc.setSpeed(vc);
 							mb.setSpeed(va);
@@ -184,7 +209,7 @@ public class TaxiV21{
 							Delay.msDelay(1000);
 							lector=color.getColorID();
 							while(lector!=black){
-								//izquierda
+								//derecha
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
 								mb.forward();
