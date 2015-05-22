@@ -3,7 +3,7 @@ import lejos.nxt.addon.*;
 import lejos.robotics.*;
 import lejos.util.Delay;
 
-public class TaxiV21{
+public class TaxiV31{
     public void run(){
     		TouchSensor touch = new TouchSensor(SensorPort.S1);
 		ColorHTSensor color = new ColorHTSensor(SensorPort.S4);
@@ -370,5 +370,5 @@ public class TaxiV21{
 			}
 		}
     public static void main (String[] args) {
-        new TaxiV21().run();}
+        new TaxiV31().run();}
 }
