@@ -178,27 +178,155 @@ public class TaxiV21{
 						}else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==true){
 							if(mirando==1){
 								if(posicionx>=direccionx){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//izquierda
+										mb.setSpeed(vc);
+										mc.setSpeed(va);
+										mc.forward();
+										mb.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}
+									mirando=mirando-1;
+									trabajando=true;
 								}else if(posicionx<direccionx){
-									
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//derecha
+										mc.setSpeed(vc);
+										mb.setSpeed(va);
+										mb.forward();
+										mc.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}        
+									mirando=mirando+1;
+									trabajando=true;
 								}
 							}else if(mirando==2){
 								if(posiciony>=direcciony){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//izquierda
+										mb.setSpeed(vc);
+										mc.setSpeed(va);
+										mc.forward();
+										mb.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}
+									mirando=mirando-1;
+									trabajando=true;
 								}else if(posiciony<direcciony){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//derecha
+										mc.setSpeed(vc);
+										mb.setSpeed(va);
+										mb.forward();
+										mc.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}        
+									mirando=mirando+1;
+									trabajando=true;
 								}
 							}else if(mirando==3){
 								if(posicionx>=direccionx){
-									
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//derecha
+										mc.setSpeed(vc);
+										mb.setSpeed(va);
+										mb.forward();
+										mc.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}        
+									mirando=mirando+1;
+									trabajando=true;
 								}else if(posicionx<direccionx){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//izquierda
+										mb.setSpeed(vc);
+										mc.setSpeed(va);
+										mc.forward();
+										mb.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}
+									mirando=mirando-1;
+									trabajando=true;
 								}
 							}else if(mirando==4){
 								if(posiciony>=direcciony){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//derecha
+										mc.setSpeed(vc);
+										mb.setSpeed(va);
+										mb.forward();
+										mc.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}        	
+									mirando=mirando+1;
+									trabajando=true;
 								}else if(posiciony<direcciony){
-
+									mc.setSpeed(vc);
+									mb.setSpeed(va);
+									mc.forward();
+									mb.forward();
+									Delay.msDelay(1000);
+									lector=color.getColorID();
+									while(lector!=black){
+										//izquierda
+										mb.setSpeed(vc);
+										mc.setSpeed(va);
+										mc.forward();
+										mb.backward();
+										Delay.msDelay(8);
+										lector=color.getColorID();
+									}
+									mirando=mirando-1;
+									trabajando=true;
 								}
 							}
 						}else if(calles[posicionx][posiciony].pos==false && calles[posicionx][posiciony].pos1==true && calles[posicionx][posiciony].pos3==false){
