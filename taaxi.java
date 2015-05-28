@@ -151,6 +151,11 @@ public class Taxi{
 						analisis=true;
 						if(posiciony>direcciony){
 						if(calles[posicionx][posiciony].norte==true){
+							mc.setSpeed(vd);
+							mb.setSpeed(vd);
+							mb.forward();
+							mc.forward();
+							Delay.msDelay(400);
 							analisis=true;
 							while(analisis){								
 								lector=color.getColorID();
@@ -224,7 +229,7 @@ public class Taxi{
 										calles[3][3].sur=false;
 										mb.forward();
 										mc.forward();
-										Delay.msDelay(200);
+										Delay.msDelay(1000);
 										trabajando=true;
 										break;
 									}
@@ -264,14 +269,15 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
 								mirando=mirando-1;
 								LCD.drawInt(mirando,13,6);
 								trabajando=true;
+								Delay.msDelay(2000);
 							}else if(posicionx<direccionx){
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
@@ -283,14 +289,15 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
 								mirando=mirando+1;
 								LCD.drawInt(mirando,13,6);
 								trabajando=true;
+								Delay.msDelay(2000);
 							}
 						}else if(calles[posicionx][posiciony].norte==false && calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
 							mc.setSpeed(vc);
@@ -303,14 +310,15 @@ public class Taxi{
 								//derecha
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
-								mb.forward();
-								mc.backward();
+								mc.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}        
 							mirando=mirando+1;
 							LCD.drawInt(mirando,13,6);
 							trabajando=true;
+							Delay.msDelay(2000);
 						}else if(calles[posicionx][posiciony].norte==false && calles[posicionx][posiciony].este==false && calles[posicionx][posiciony].oeste==true){
 							mc.setSpeed(vc);
 							mb.setSpeed(va);
@@ -323,21 +331,22 @@ public class Taxi{
 								mb.setSpeed(vc);
 								mc.setSpeed(va);
 								mc.forward();
-								mb.backward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}
 							mirando=mirando-1;
 							LCD.drawInt(mirando,13,6);
 							trabajando=true;
+							Delay.msDelay(2000);
 						}
 						}else if(posiciony>=direcciony){
 							if(calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==true){
 								if(posicionx>=direccionx){
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mc.forward();
 									mb.forward();
+									mc.forward();
 									Delay.msDelay(1000);
 									lector=color.getColorID();
 									mirando=mirando-1;
@@ -345,13 +354,14 @@ public class Taxi{
 										//izquierda
 										mb.setSpeed(vc);
 										mc.setSpeed(va);
-										mc.forward();
-										mb.backward();
+										mb.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}									
 									LCD.drawInt(mirando,13,6);
 									trabajando=true;
+									Delay.msDelay(2000);
 								}else if(posicionx<direccionx){
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
@@ -364,13 +374,14 @@ public class Taxi{
 										//derecha
 										mc.setSpeed(vc);
 										mb.setSpeed(va);
-										mb.forward();
-										mc.backward();
+										mc.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}        
 									LCD.drawInt(mirando,13,6);
 									trabajando=true;
+									Delay.msDelay(2000);
 								}
 							}else if(calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
 								mc.setSpeed(vc);
@@ -383,14 +394,15 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
 								mirando=mirando+1;
 								LCD.drawInt(mirando,13,6);
 								trabajando=true;
+								Delay.msDelay(2000);
 							}else if(calles[posicionx][posiciony].este==false && calles[posicionx][posiciony].oeste==true){
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
@@ -402,20 +414,26 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
 								mirando=mirando-1;
 								LCD.drawInt(mirando,13,6);
 								trabajando=true;
+								Delay.msDelay(2000);
 							}
 						}
 					}else if(mirando==2){
 						analisis=true;
 						if(posicionx<direccionx){
 						if(calles[posicionx][posiciony].este==true){
+							mc.setSpeed(vd);
+							mb.setSpeed(vd);
+							mb.forward();
+							mc.forward();
+							Delay.msDelay(400);
 							analisis=true;
 							while(analisis){
 								lector=color.getColorID();
@@ -487,7 +505,7 @@ public class Taxi{
 										calles[3][3].sur=false;
 										mb.forward();
 										mc.forward();
-										Delay.msDelay(200);
+										Delay.msDelay(1000);
 										trabajando=true;
 										break;
 									}
@@ -527,8 +545,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
@@ -546,8 +564,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -566,8 +584,8 @@ public class Taxi{
 								//derecha
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
-								mb.forward();
-								mc.backward();
+								mc.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}        
@@ -585,8 +603,8 @@ public class Taxi{
 								//izquierda
 								mb.setSpeed(vc);
 								mc.setSpeed(va);
-								mc.forward();
-								mb.backward();
+								mb.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}
@@ -607,8 +625,8 @@ public class Taxi{
 										//izquierda
 										mb.setSpeed(vc);
 										mc.setSpeed(va);
-										mc.forward();
-										mb.backward();
+										mb.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}
@@ -626,8 +644,8 @@ public class Taxi{
 										//derecha
 										mc.setSpeed(vc);
 										mb.setSpeed(va);
-										mb.forward();
-										mc.backward();
+										mc.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}        
@@ -646,8 +664,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -665,8 +683,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
@@ -798,8 +816,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}								
@@ -817,8 +835,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -838,8 +856,8 @@ public class Taxi{
 								//derecha
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
-								mb.forward();
-								mc.backward();
+								mc.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}        
@@ -857,8 +875,8 @@ public class Taxi{
 								//izquierda
 								mb.setSpeed(vc);
 								mc.setSpeed(va);
-								mc.forward();
-								mb.backward();
+								mb.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}
@@ -880,8 +898,8 @@ public class Taxi{
 										//izquierda
 										mb.setSpeed(vc);
 										mc.setSpeed(va);
-										mc.forward();
-										mb.backward();
+										mb.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}
@@ -900,8 +918,8 @@ public class Taxi{
 										//derecha
 										mc.setSpeed(vc);
 										mb.setSpeed(va);
-										mb.forward();
-										mc.backward();
+										mc.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}        
@@ -921,8 +939,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -940,8 +958,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
@@ -960,6 +978,11 @@ public class Taxi{
 						LCD.drawInt(direcciony,13,4);
 						if(posicionx>direccionx){
 						if(calles[posicionx][posiciony].oeste==true){
+							mc.setSpeed(vd);
+							mb.setSpeed(vd);
+							mb.forward();
+							mc.forward();
+							Delay.msDelay(400);
 							analisis=true;
 							while(analisis){
 								lector=color.getColorID();
@@ -1067,8 +1090,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
@@ -1086,8 +1109,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -1106,8 +1129,8 @@ public class Taxi{
 								//derecha
 								mc.setSpeed(vc);
 								mb.setSpeed(va);
-								mb.forward();
-								mc.backward();
+								mc.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}        
@@ -1125,8 +1148,8 @@ public class Taxi{
 								//izquierda
 								mb.setSpeed(vc);
 								mc.setSpeed(va);
-								mc.forward();
-								mb.backward();
+								mb.forward();
+								
 								Delay.msDelay(8);
 								lector=color.getColorID();
 							}
@@ -1147,8 +1170,8 @@ public class Taxi{
 										//izquierda
 										mb.setSpeed(vc);
 										mc.setSpeed(va);
-										mc.forward();
-										mb.backward();
+										mb.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}
@@ -1158,16 +1181,16 @@ public class Taxi{
 								}else if(posiciony>=direcciony){
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mc.forward();
 									mb.forward();
+									mc.forward();
 									Delay.msDelay(1000);
 									lector=color.getColorID();
 									while(lector!=black){
 										//derecha
 										mc.setSpeed(vc);
 										mb.setSpeed(va);
-										mb.forward();
-										mc.backward();
+										mc.forward();
+										
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}        
@@ -1186,8 +1209,8 @@ public class Taxi{
 									//derecha
 									mc.setSpeed(vc);
 									mb.setSpeed(va);
-									mb.forward();
-									mc.backward();
+									mc.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}        
@@ -1205,8 +1228,8 @@ public class Taxi{
 									//izquierda
 									mb.setSpeed(vc);
 									mc.setSpeed(va);
-									mc.forward();
-									mb.backward();
+									mb.forward();
+									
 									Delay.msDelay(8);
 									lector=color.getColorID();
 								}
