@@ -27,19 +27,39 @@ public class Taxi{
 			}
 			matrizCalle1++;
 		}
-		//esquinas
+		//borde
 		calles[0][0].norte=false;
 		calles[0][0].este=true;
 		calles[0][0].oeste=false;
 		calles[0][0].sur=true;
+		calles[0][1].oeste=false;
+		calles[0][1].norte=true;
+		calles[0][1].sur=true;
+		calles[0][2].oeste=false;
+		calles[0][2].sur=false;
+		calles[0][2].norte=false;
 		calles[0][3].norte=true;
 		calles[0][3].este=true;
 		calles[0][3].oeste=false;
 		calles[0][3].sur=false;
+		calles[1][3].sur=false;
+		calles[1][3].este=true;
+		calles[1][3].oeste=true;
+		calles[2][3].sur=false;
+		calles[2][3].este=true;
+		calles[2][3].oeste=true;
+		calles[1][0].norte=false;
+		calles[2][0].norte=false;
 		calles[3][0].norte=false;
 		calles[3][0].este=false;
 		calles[3][0].oeste=true;
 		calles[3][0].sur=true;
+		calles[3][1].este=false;
+		calles[3][1].norte=true;
+		calles[3][1].sur=true;
+		calles[3][2].este=false;
+		calles[3][2].norte=true;
+		calles[3][2].sur=true;
 		calles[3][3].norte=true;
 		calles[3][3].este=false;
 		calles[3][3].oeste=true;
@@ -59,29 +79,21 @@ public class Taxi{
 		colores[0][1].este=true;
 		colores[0][1].oeste=true;
 		//rojo//oox
-		colores[0][0].sur=true;
+		colores[0][0].sur=false;
 		colores[0][0].este=false;
 		colores[0][0].oeste=true;
 		//azul//xoo
 		colores[0][8].sur=true;
-		colores[0][8].este=true;
-		colores[0][8].oeste=false;
+		colores[0][8].este=false;
+		colores[0][8].oeste=true;
 		//amarillo//xxo
 		colores[0][3].sur=true;
 		colores[0][3].este=true;
 		colores[0][3].oeste=false;
-		//naranjo//xox
-		colores[0][5].sur=true;
-		colores[0][5].este=false;
+		//piel//xox
+		colores[0][5].sur=false;
+		colores[0][5].este=true;		
 		colores[0][5].oeste=false;
-		//morado(magenta)//oxo
-		colores[0][4].sur=true;
-		colores[0][4].este=true;
-		colores[0][4].oeste=true;
-		//celeste(cyan)//oxx
-		colores[0][6].sur=true;
-		colores[0][6].este=false;
-		colores[0][6].oeste=true;
 		//SENSOR DE LUZ//
 		int negroL=879; //Indicara donde esta el pasajero, y su destino. 
 		//aca va el codigo del seguidor
@@ -94,6 +106,7 @@ public class Taxi{
 		int va = 80;
 		int vb = 80;
 		int vc = 80;
+		int vd = 500;
 		//empezamos con la acción
 		mb.setSpeed(v0);
 		mc.setSpeed(v0);
@@ -102,11 +115,11 @@ public class Taxi{
 		int l=0;
 		boolean analisis=false;
 		int lector=color.getColorID();
-		int direccionx=1;
-		int direcciony=2;
-		int posicionx=0;
-		int posiciony=0;
-		int mirando=3;
+		int direccionx=2;
+		int direcciony=0;
+		int posicionx=1;
+		int posiciony=3;
+		int mirando=1;
 		boolean lleguey=false;
 		boolean lleguex=false;
 		boolean trabajando=false;
@@ -177,14 +190,34 @@ public class Taxi{
 										calles[0][0].este=true;
 										calles[0][0].oeste=false;
 										calles[0][0].sur=true;
+										calles[0][1].oeste=false;
+										calles[0][1].norte=true;
+										calles[0][1].sur=true;
+										calles[0][2].oeste=false;
+										calles[0][2].sur=false;
+										calles[0][2].norte=false;
 										calles[0][3].norte=true;
 										calles[0][3].este=true;
 										calles[0][3].oeste=false;
 										calles[0][3].sur=false;
+										calles[1][3].sur=false;
+										calles[1][3].este=true;
+										calles[1][3].oeste=true;
+										calles[2][3].sur=false;
+										calles[2][3].este=true;
+										calles[2][3].oeste=true;
+										calles[1][0].norte=false;
+										calles[2][0].norte=false;
 										calles[3][0].norte=false;
 										calles[3][0].este=false;
 										calles[3][0].oeste=true;
 										calles[3][0].sur=true;
+										calles[3][1].este=false;
+										calles[3][1].norte=true;
+										calles[3][1].sur=true;
+										calles[3][2].este=false;
+										calles[3][2].norte=true;
+										calles[3][2].sur=true;
 										calles[3][3].norte=true;
 										calles[3][3].este=false;
 										calles[3][3].oeste=true;
@@ -307,6 +340,7 @@ public class Taxi{
 									mb.forward();
 									Delay.msDelay(1000);
 									lector=color.getColorID();
+									mirando=mirando-1;
 									while(lector!=black){
 										//izquierda
 										mb.setSpeed(vc);
@@ -315,8 +349,7 @@ public class Taxi{
 										mb.backward();
 										Delay.msDelay(8);
 										lector=color.getColorID();
-									}
-									mirando=mirando-1;
+									}									
 									LCD.drawInt(mirando,13,6);
 									trabajando=true;
 								}else if(posicionx<direccionx){
@@ -326,6 +359,7 @@ public class Taxi{
 									mb.forward();
 									Delay.msDelay(1000);
 									lector=color.getColorID();
+									mirando=mirando+1;
 									while(lector!=black){
 										//derecha
 										mc.setSpeed(vc);
@@ -335,7 +369,6 @@ public class Taxi{
 										Delay.msDelay(8);
 										lector=color.getColorID();
 									}        
-									mirando=mirando+1;
 									LCD.drawInt(mirando,13,6);
 									trabajando=true;
 								}
@@ -420,14 +453,34 @@ public class Taxi{
 										calles[0][0].este=true;
 										calles[0][0].oeste=false;
 										calles[0][0].sur=true;
+										calles[0][1].oeste=false;
+										calles[0][1].norte=true;
+										calles[0][1].sur=true;
+										calles[0][2].oeste=false;
+										calles[0][2].sur=false;
+										calles[0][2].norte=false;
 										calles[0][3].norte=true;
 										calles[0][3].este=true;
 										calles[0][3].oeste=false;
 										calles[0][3].sur=false;
+										calles[1][3].sur=false;
+										calles[1][3].este=true;
+										calles[1][3].oeste=true;
+										calles[2][3].sur=false;
+										calles[2][3].este=true;
+										calles[2][3].oeste=true;
+										calles[1][0].norte=false;
+										calles[2][0].norte=false;
 										calles[3][0].norte=false;
 										calles[3][0].este=false;
 										calles[3][0].oeste=true;
 										calles[3][0].sur=true;
+										calles[3][1].este=false;
+										calles[3][1].norte=true;
+										calles[3][1].sur=true;
+										calles[3][2].este=false;
+										calles[3][2].norte=true;
+										calles[3][2].sur=true;
 										calles[3][3].norte=true;
 										calles[3][3].este=false;
 										calles[3][3].oeste=true;
@@ -630,6 +683,11 @@ public class Taxi{
 						LCD.drawInt(mirando,13,6);
 						if(posiciony<direcciony){
 						if(calles[posicionx][posiciony].sur==true){
+							mc.setSpeed(vd);
+							mb.setSpeed(vd);
+							mb.forward();
+							mc.forward();
+							Delay.msDelay(400);
 							analisis=true;
 							while(analisis){
 								lector=color.getColorID();
@@ -652,6 +710,10 @@ public class Taxi{
 										mc.stop();
 										Delay.msDelay(2000);
 										lector=color.getColorID();
+										Delay.msDelay(100);
+										mb.forward();
+										mc.forward();
+										Delay.msDelay(400);
 										LCD.drawInt(lector,13,5);
 										posiciony++;
 										LCD.drawInt(posicionx,11,1);
@@ -664,21 +726,38 @@ public class Taxi{
 										calles[0][0].este=true;
 										calles[0][0].oeste=false;
 										calles[0][0].sur=true;
+										calles[0][1].oeste=false;
+										calles[0][1].norte=true;
+										calles[0][1].sur=true;
+										calles[0][2].oeste=false;
+										calles[0][2].sur=false;
+										calles[0][2].norte=false;
 										calles[0][3].norte=true;
 										calles[0][3].este=true;
 										calles[0][3].oeste=false;
 										calles[0][3].sur=false;
+										calles[1][3].sur=false;
+										calles[1][3].este=true;
+										calles[1][3].oeste=true;
+										calles[2][3].sur=false;
+										calles[2][3].este=true;
+										calles[2][3].oeste=true;
+										calles[1][0].norte=false;
+										calles[2][0].norte=false;
 										calles[3][0].norte=false;
 										calles[3][0].este=false;
 										calles[3][0].oeste=true;
 										calles[3][0].sur=true;
+										calles[3][1].este=false;
+										calles[3][1].norte=true;
+										calles[3][1].sur=true;
+										calles[3][2].este=false;
+										calles[3][2].norte=true;
+										calles[3][2].sur=true;
 										calles[3][3].norte=true;
 										calles[3][3].este=false;
 										calles[3][3].oeste=true;
-										calles[3][3].sur=false;
-										mb.forward();
-										mc.forward();
-										Delay.msDelay(200);
+										calles[3][3].sur=false;										
 										trabajando=true;
 										break;
 									}
@@ -914,14 +993,34 @@ public class Taxi{
 										calles[0][0].este=true;
 										calles[0][0].oeste=false;
 										calles[0][0].sur=true;
+										calles[0][1].oeste=false;
+										calles[0][1].norte=true;
+										calles[0][1].sur=true;
+										calles[0][2].oeste=false;
+										calles[0][2].sur=false;
+										calles[0][2].norte=false;
 										calles[0][3].norte=true;
 										calles[0][3].este=true;
 										calles[0][3].oeste=false;
 										calles[0][3].sur=false;
+										calles[1][3].sur=false;
+										calles[1][3].este=true;
+										calles[1][3].oeste=true;
+										calles[2][3].sur=false;
+										calles[2][3].este=true;
+										calles[2][3].oeste=true;
+										calles[1][0].norte=false;
+										calles[2][0].norte=false;
 										calles[3][0].norte=false;
 										calles[3][0].este=false;
 										calles[3][0].oeste=true;
 										calles[3][0].sur=true;
+										calles[3][1].este=false;
+										calles[3][1].norte=true;
+										calles[3][1].sur=true;
+										calles[3][2].este=false;
+										calles[3][2].norte=true;
+										calles[3][2].sur=true;
 										calles[3][3].norte=true;
 										calles[3][3].este=false;
 										calles[3][3].oeste=true;
