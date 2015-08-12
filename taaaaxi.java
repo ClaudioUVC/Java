@@ -19,10 +19,6 @@ public class Taxi{
 			matrizCalle2=0;
 			while(matrizCalle2<=3){
 				calles[matrizCalle1][matrizCalle2]=new Celda();
-				calles[matrizCalle1][matrizCalle2].norte=true;
-				calles[matrizCalle1][matrizCalle2].sur=true;
-				calles[matrizCalle1][matrizCalle2].este=true;
-				calles[matrizCalle1][matrizCalle2].oeste=true;
 				matrizCalle2++;
 			}
 			matrizCalle1++;
@@ -49,9 +45,6 @@ public class Taxi{
 		int matrizColores = 0;
 		while(matrizColores<=14){
 			colores[0][matrizColores]=new Celda();
-			colores[0][matrizColores].sur=false;
-			colores[0][matrizColores].este=false;
-			colores[0][matrizColores].oeste=false;
 			matrizColores++;
 		}
 		//verde//ooo
@@ -83,7 +76,8 @@ public class Taxi{
 		colores[0][6].este=false;
 		colores[0][6].oeste=true;
 		//SENSOR DE LUZ//
-		int negroL=879; //Indicara donde esta el pasajero, y su destino. 
+		int negroluz1=325;
+		int negroluz2=375;//Indicara donde esta el pasajero, y su destino. 
 		//aca va el codigo del seguidor
 		int pa = 7;
 		int black=7;
@@ -103,8 +97,8 @@ public class Taxi{
 		boolean analisis=false;
 		int lector=color.getColorID();
 		int lectorpasajero=light.getNormalizedLightValue();
-		int direccionx=1;
-		int direcciony=2;
+		int direccionx=0;
+		int direcciony=0;
 		int posicionx=0;
 		int posiciony=0;
 		int mirando=3;
@@ -112,20 +106,39 @@ public class Taxi{
 		boolean lleguex=false;
 		boolean trabajando=false;
 		boolean pasajero = false;
-		if(trabajando==false){
+		boolean buscarpasajero = false;
+		while(trabajando==false){
 			if(pasajero=false){
-				//preguntar si quiere trabajar o terminar.
-				Random generator = new Random();
-				direccionx = generator.nextInt(4);
-				direcciony = generator.nextInt(4);
-				//ir a tal lugar				
+				int pregunta=1;
+				while(direccionx==posicionx && direcciony==posiciony){
+					LCD.drawString("Desea trabajar" , 0 , 0);
+					LCD.drawString("o terminar?" , 0 , 1);					
+					if(Button.LEFT.isDown()){pregunta=pregunta*(-1);LCD.drawString("terminar" , 0 , 3);Delay.msDelay(500);}
+					if(Button.RIGHT.isDown()){pregunta=pregunta*(-1);LCD.drawString("trabajar" , 0 , 3);Delay.msDelay(500);}
+					if(Button.ENTER.isDown()){
+						if(pregunta==1){
+							buscarpasajero=true;
+						}else if(pregunta==-1){
+							break;
+						}
+						Delay.msDelay(500);
+						break;
+					}
+				}
+				if(buscarpasajero==true){
+					Random generator = new Random();
+					direccionx = generator.nextInt(4);
+					direcciony = generator.nextInt(4);
+				}								
 			}
-			//preguntar direccion.
 			while(direccionx!=posicionx || direcciony!=posiciony){
 				trabajando=true;
 				while(trabajando){
 					if(mirando==5){
 						mirando=1;
+						if(direccionx==posicionx && direcciony==posiciony){
+							trabajando=false;
+						}
 						trabajando=true;
 					}else if(mirando==0){
 						mirando=4;
@@ -166,11 +179,27 @@ public class Taxi{
 									lector=color.getColorID();
 									if(pasajero=false){
 										lectorpasajero=light.getNormalizedLightValue();
-										if(lectorpasajero!=500){
+										if(lectorpasajero>=negroluz1 && lectorpasajero<=negroluz2){
 											pasajero=true;
-											//preguntar direccion en pantalla
-											direccionx=3;//direccionpuestaenpantalla
-											direcciony=1;//direccionpuestaenpantalla
+											int i = 0;
+											while(true){
+											LCD.clear();
+											LCD.drawString("que direccion" , 0 , 0);
+											LCD.drawString("quiere ir x?" , 0 , 1);
+											LCD.drawString(Integer.toString(i), 0 , 2);
+											if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+											if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+											if(Button.ENTER.isDown()){direccionx = i;Delay.msDelay(500); break;}	
+											}
+											while(true){
+												LCD.clear();
+												LCD.drawString("que direccion" , 0 , 0);
+												LCD.drawString("quiere ir y?" , 0 , 1);
+												LCD.drawString(Integer.toString(i), 0 , 2);
+												if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+												if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+												if(Button.ENTER.isDown()){direcciony = i;Delay.msDelay(500); break;}	
+											}
 										}
 									}
 									if(lector!=black && lector!=white){
@@ -184,6 +213,9 @@ public class Taxi{
 										calles[posicionx][posiciony].norte=colores[0][lector].sur;
 										calles[posicionx][posiciony].este=colores[0][lector].oeste;
 										calles[posicionx][posiciony].oeste=colores[0][lector].este;
+										if(direccionx==posicionx && direcciony==posiciony){
+											trabajando=false;
+										}
 										trabajando=true;
 									}else{
 										analisis=true;
@@ -238,6 +270,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///
 								mirando=mirando-1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}else if(posicionx<direccionx){
 								mc.setSpeed(vc);
@@ -256,6 +291,9 @@ public class Taxi{
 									lector=color.getColorID();
 								}        
 								mirando=mirando+1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}
 						}else if(calles[posicionx][posiciony].norte==false && calles[posicionx][posiciony].este==true && calles[posicionx][posiciony].oeste==false){
@@ -284,6 +322,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///      
 							mirando=mirando+1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}else if(calles[posicionx][posiciony].norte==false && calles[posicionx][posiciony].este==false && calles[posicionx][posiciony].oeste==true){
 							int va = 125;
@@ -310,6 +351,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///
 							mirando=mirando-1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}
 					
@@ -340,11 +384,27 @@ public class Taxi{
 									lector=color.getColorID();
 									if(pasajero=false){
 										lectorpasajero=light.getNormalizedLightValue();
-										if(lectorpasajero!=500){
+										if(lectorpasajero>=negroluz1 && lectorpasajero<=negroluz2){
 											pasajero=true;
-											//preguntar direccion en pantalla
-											direccionx=3;//direccionpuestaenpantalla
-											direcciony=1;//direccionpuestaenpantalla
+											int i = 0;
+											while(true){
+											LCD.clear();
+											LCD.drawString("que direccion" , 0 , 0);
+											LCD.drawString("quiere ir x?" , 0 , 1);
+											LCD.drawString(Integer.toString(i), 0 , 2);
+											if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+											if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+											if(Button.ENTER.isDown()){direccionx = i;Delay.msDelay(500); break;}	
+											}
+											while(true){
+												LCD.clear();
+												LCD.drawString("que direccion" , 0 , 0);
+												LCD.drawString("quiere ir y?" , 0 , 1);
+												LCD.drawString(Integer.toString(i), 0 , 2);
+												if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+												if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+												if(Button.ENTER.isDown()){direcciony = i;Delay.msDelay(500); break;}	
+											}
 										}
 									}
 									if(lector!=black && lector!=white){
@@ -358,6 +418,9 @@ public class Taxi{
 										calles[posicionx][posiciony].este=colores[0][lector].sur;
 										calles[posicionx][posiciony].sur=colores[0][lector].oeste;
 										calles[posicionx][posiciony].norte=colores[0][lector].este;
+										if(direccionx==posicionx && direcciony==posiciony){
+											trabajando=false;
+										}
 										trabajando=true;
 									}else{
 										analisis=true;
@@ -412,6 +475,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///
 								mirando=mirando-1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}else if(posiciony<direcciony){
 								//Mostrar valor de Ancho
@@ -439,6 +505,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///       
 								mirando=mirando+1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}
 						}else if(calles[posicionx][posiciony].este==false && calles[posicionx][posiciony].sur==true && calles[posicionx][posiciony].norte==false){
@@ -467,6 +536,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///        
 							mirando=mirando+1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}else if(calles[posicionx][posiciony].este==false && calles[posicionx][posiciony].sur==false && calles[posicionx][posiciony].norte==true){
 							int va = 125;
@@ -493,6 +565,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///
 							mirando=mirando-1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}
 					}else if(mirando==3){
@@ -523,11 +598,27 @@ public class Taxi{
 									lector=color.getColorID();
 									if(pasajero=false){
 										lectorpasajero=light.getNormalizedLightValue();
-										if(lectorpasajero!=500){
+										if(lectorpasajero>=negroluz1 && lectorpasajero<=negroluz2){
 											pasajero=true;
-											//preguntar direccion en pantalla
-											direccionx=3;//direccionpuestaenpantalla
-											direcciony=1;//direccionpuestaenpantalla
+											int i = 0;
+											while(true){
+											LCD.clear();
+											LCD.drawString("que direccion" , 0 , 0);
+											LCD.drawString("quiere ir x?" , 0 , 1);
+											LCD.drawString(Integer.toString(i), 0 , 2);
+											if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+											if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+											if(Button.ENTER.isDown()){direccionx = i;Delay.msDelay(500); break;}	
+											}
+											while(true){
+												LCD.clear();
+												LCD.drawString("que direccion" , 0 , 0);
+												LCD.drawString("quiere ir y?" , 0 , 1);
+												LCD.drawString(Integer.toString(i), 0 , 2);
+												if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+												if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+												if(Button.ENTER.isDown()){direcciony = i;Delay.msDelay(500); break;}	
+											}
 										}
 									}
 									LCD.drawInt(lector,13,5);
@@ -543,6 +634,9 @@ public class Taxi{
 										calles[posicionx][posiciony].sur=colores[0][lector].sur;
 										calles[posicionx][posiciony].oeste=colores[0][lector].oeste;
 										calles[posicionx][posiciony].este=colores[0][lector].este;
+										if(direccionx==posicionx && direcciony==posiciony){
+											trabajando=false;
+										}
 										trabajando=true;
 									}else{
 										analisis=true;
@@ -597,6 +691,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///
 								mirando=mirando-1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}else if(posicionx>=direccionx){
 								//Mostrar valor de Ancho
@@ -624,6 +721,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///    
 								mirando=mirando+1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}
 						}else if(calles[posicionx][posiciony].sur==false && calles[posicionx][posiciony].oeste==true && calles[posicionx][posiciony].este==false){
@@ -652,6 +752,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///      
 							mirando=mirando+1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}else if(calles[posicionx][posiciony].sur==false && calles[posicionx][posiciony].oeste==false && calles[posicionx][posiciony].este==true){
 							int va = 125;
@@ -678,6 +781,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///
 							mirando=mirando-1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}
 					}else if(mirando==4){
@@ -707,11 +813,27 @@ public class Taxi{
 									lector=color.getColorID();
 									if(pasajero=false){
 										lectorpasajero=light.getNormalizedLightValue();
-										if(lectorpasajero!=500){
+										if(lectorpasajero>=negroluz1 && lectorpasajero<=negroluz2){
 											pasajero=true;
-											//preguntar direccion en pantalla
-											direccionx=3;//direccionpuestaenpantalla
-											direcciony=1;//direccionpuestaenpantalla
+											int i = 0;
+											while(true){
+											LCD.clear();
+											LCD.drawString("que direccion" , 0 , 0);
+											LCD.drawString("quiere ir x?" , 0 , 1);
+											LCD.drawString(Integer.toString(i), 0 , 2);
+											if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+											if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+											if(Button.ENTER.isDown()){direccionx = i;Delay.msDelay(500); break;}	
+											}
+											while(true){
+												LCD.clear();
+												LCD.drawString("que direccion" , 0 , 0);
+												LCD.drawString("quiere ir y?" , 0 , 1);
+												LCD.drawString(Integer.toString(i), 0 , 2);
+												if(Button.LEFT.isDown() && i > 0){i--;Delay.msDelay(500);}
+												if(Button.RIGHT.isDown() && i < 3){i++;Delay.msDelay(500);}
+												if(Button.ENTER.isDown()){direcciony = i;Delay.msDelay(500); break;}	
+											}
 										}
 									}
 									LCD.drawInt(lector,13,5);
@@ -727,6 +849,9 @@ public class Taxi{
 										calles[posicionx][posiciony].oeste=colores[0][lector].sur;
 										calles[posicionx][posiciony].norte=colores[0][lector].oeste;
 										calles[posicionx][posiciony].sur=colores[0][lector].este;
+										if(direccionx==posicionx && direcciony==posiciony){
+											trabajando=false;
+										}
 										trabajando=true;
 									}else{
 										analisis=true;
@@ -781,6 +906,9 @@ public class Taxi{
 								Delay.msDelay(700);
 								///
 								mirando=mirando-1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}else if(posiciony>=direcciony){
 								mc.setSpeed(vc);
@@ -799,6 +927,9 @@ public class Taxi{
 									lector=color.getColorID();
 								}        
 								mirando=mirando+1;
+								if(direccionx==posicionx && direcciony==posiciony){
+									trabajando=false;
+								}
 								trabajando=true;
 							}
 						}else if(calles[posicionx][posiciony].oeste==false && calles[posicionx][posiciony].norte==true && calles[posicionx][posiciony].sur==false){
@@ -818,6 +949,9 @@ public class Taxi{
 								lector=color.getColorID();
 							}        
 							mirando=mirando+1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}else if(calles[posicionx][posiciony].oeste==false && calles[posicionx][posiciony].norte==false && calles[posicionx][posiciony].sur==true){
 							int va = 125;
@@ -844,6 +978,9 @@ public class Taxi{
 							Delay.msDelay(700);
 							///
 							mirando=mirando-1;
+							if(direccionx==posicionx && direcciony==posiciony){
+								trabajando=false;
+							}
 							trabajando=true;
 						}
 					}
